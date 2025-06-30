@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { UserProvider } from "../context/UserContext";
+import { UserProvider } from "../contexts/UserContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import ThemeView from "../components/ThemeView";
