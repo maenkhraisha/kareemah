@@ -1,6 +1,5 @@
 import {
     StyleSheet,
-    Text,
     View,
     Animated,
     TouchableOpacity,
@@ -12,6 +11,11 @@ import { useState, useRef } from "react";
 import { Link } from "expo-router";
 import { Colors } from "../constants/colors";
 
+import ThemeHamburger from "../components/ThemeHamburger";
+import ThemeText from "../components/ThemeText";
+import { useUser } from "../hooks/useUser";
+import ThemeButton from "../components/ThemeButton";
+
 const { width } = Dimensions.get("window");
 const SIDEBAR_WIDTH = width * 0.7;
 
@@ -22,6 +26,8 @@ const Sidebar = () => {
     const colorScheme = useColorScheme();
     const theme = Colors[colorScheme] || Colors.light;
 
+    const { logout } = useUser();
+
     const toggleSidebar = () => {
         Animated.timing(slideAnim, {
             toValue: isOpen ? -SIDEBAR_WIDTH : 0,
@@ -31,21 +37,21 @@ const Sidebar = () => {
         setIsOpen(!isOpen);
     };
 
+    const handleLogout = async () => {
+        try {
+            toggleSidebar();
+
+            await logout();
+        } catch (error) {
+            console.error("Logout failed:", error);
+            // Handle logout error (e.g., show a message to the user)
+        }
+    };
+
     return (
         <>
             <TouchableOpacity onPress={toggleSidebar} style={styles.menuButton}>
-                <Image
-                    source={require("../assets/img/hamburger.png")}
-                    style={{
-                        width: 30,
-                        height: 30,
-                        borderColor: theme.onBackground,
-                        borderWidth: 1,
-                        borderRadius: 3,
-                        filter: "invert(1)",
-                    }}
-                    alt='Hamburger Menu'
-                />
+                <ThemeHamburger />
             </TouchableOpacity>
 
             <Animated.View
@@ -55,28 +61,51 @@ const Sidebar = () => {
                         transform: [{ translateX: slideAnim }],
                     },
                 ]}>
-                <View style={styles.sidebarContent}>
+                <View
+                    style={[
+                        {
+                            backgroundColor: theme.surface,
+                            color: theme.onSurface,
+                        },
+                        styles.sidebarContent,
+                    ]}>
                     <Link href='/' style={styles.link} onPress={toggleSidebar}>
-                        <Text>Home</Text>
+                        <ThemeText title='Home' style={{ fontSize: 28 }} />
                     </Link>
                     <Link
                         href='/requestTrip'
                         style={styles.link}
                         onPress={toggleSidebar}>
-                        <Text>Request Trip</Text>
+                        <ThemeText
+                            title='Request Trip'
+                            style={{ fontSize: 28 }}
+                        />
                     </Link>
                     <Link
                         href='/about'
                         style={styles.link}
                         onPress={toggleSidebar}>
-                        <Text>About</Text>
+                        <ThemeText title='About' style={{ fontSize: 28 }} />
                     </Link>
                     <Link
                         href='/login'
                         style={styles.link}
                         onPress={toggleSidebar}>
-                        <Text>Login</Text>
+                        <ThemeText title='Login' style={{ fontSize: 28 }} />
                     </Link>
+                    <Link
+                        href='/register'
+                        style={styles.link}
+                        onPress={toggleSidebar}>
+                        <ThemeText title='Register' style={{ fontSize: 28 }} />
+                    </Link>
+
+                    <ThemeButton
+                        style={styles.link}
+                        onPress={handleLogout}
+                        title='Logout'>
+                        <ThemeText title='Register' style={{ fontSize: 28 }} />
+                    </ThemeButton>
                 </View>
             </Animated.View>
 
@@ -100,13 +129,13 @@ const styles = StyleSheet.create({
         left: 0,
         width: SIDEBAR_WIDTH,
         height: "100%",
-        backgroundColor: "#f0f0f0",
-        padding: 20,
+
         zIndex: 100,
     },
     sidebarContent: {
         flex: 1,
         justifyContent: "center",
+        alignItems: "center",
     },
     link: {
         marginBottom: 20,

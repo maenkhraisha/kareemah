@@ -1,52 +1,31 @@
-import { Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
+import { UserProvider } from "../context/UserContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { useColorScheme, View } from "react-native";
-import { Colors } from "../constants/colors"; // Adjust the import path as necessary
-
+import ThemeView from "../components/ThemeView";
 import Sidebar from "./sidebar";
 
-export default function Layout() {
-    const colorScheme = useColorScheme();
-    const theme = Colors[colorScheme] || Colors.light;
-
+export default function RootLayout() {
     return (
-        <SafeAreaProvider>
-            <StatusBar style='auto' />
-            <View
-                style={[
-                    styles.container,
-                    {
-                        backgroundColor: theme.background,
-                        color: theme.onBackground,
-                    },
-                ]}>
-                <Sidebar />
-                <View
-                    style={[
-                        styles.content,
-                        {
-                            backgroundColor: theme.background,
-                            color: theme.onBackground,
-                        },
-                    ]}>
-                    <Slot />
-                </View>
-            </View>
-        </SafeAreaProvider>
+        <UserProvider>
+            <SafeAreaProvider>
+                <StatusBar style='auto' />
+                <ThemeView style={{ flex: 1 }}>
+                    <Sidebar />
+                    <Stack
+                        screenOptions={{
+                            headerShown: false,
+                        }}>
+                        {/* Public routes */}
+                        <Stack.Screen name='index' />
+                        <Stack.Screen name='(auth)' />
+                        <Stack.Screen name='about' />
+
+                        {/* Protected routes group */}
+                        <Stack.Screen name='(UserOnly)' />
+                    </Stack>
+                </ThemeView>
+            </SafeAreaProvider>
+        </UserProvider>
     );
 }
-
-const styles = {
-    container: {
-        flex: 1,
-
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    content: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-};

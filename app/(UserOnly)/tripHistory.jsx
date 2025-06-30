@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
 
-const login = () => {
+const tripHistory = () => {
     return (
         <View>
-            <Text>login</Text>
+            <Text>tripHistory</Text>
         </View>
     );
 };
 
-export default login;
+export default tripHistory;
 
 const styles = StyleSheet.create({});

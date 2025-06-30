@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme":"kareemah",
+    "scheme": "kareemah",
     "name": "kareemah",
     "slug": "kareemah",
     "version": "1.0.0",
@@ -14,20 +14,28 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maen1980.kareemah"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.maen1980.kareemah"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cc706dee-1425-46c3-b1fd-227de66b7cde"
+      }
+    }
   }
 }
