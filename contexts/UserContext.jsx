@@ -63,7 +63,7 @@ export function UserProvider({ children }) {
             }
         } catch (error) {
             setUser(null);
-            console.error("Error fetching initial user data:", error);
+            // console.error("Error fetching initial user data:", error); // Removed this line
             return null; // Return null if there's an error
         } finally {
             setAuthChecked(true);
