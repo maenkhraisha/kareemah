@@ -30,7 +30,6 @@ const register = () => {
             // Handle error (e.g., show a message to the user)
             return;
         }
-        console.log("Register button pressed");
     };
 
     return (

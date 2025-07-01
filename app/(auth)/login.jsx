@@ -36,8 +36,6 @@ const login = () => {
             // Handle login logic here
             const res = await login(email, password);
 
-            console.log(res);
-
             navigation.navigate("index");
 
             if (!email || !password) {

@@ -14,9 +14,8 @@ const Index = () => {
     const insets = useSafeAreaInsets();
 
     const { user } = useUser();
-    console.log(user?.email);
 
-    const email = user ? "Welcome Back " + user?.email : "Logged in";
+    const email = user ? "Welcome Back " + user?.email : "welcome to Kareemah";
 
     return (
         <ThemeView safe={true}>

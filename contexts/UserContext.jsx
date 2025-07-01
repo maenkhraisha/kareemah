@@ -14,11 +14,9 @@ export function UserProvider({ children }) {
                 email, // User email
                 password // User password
             );
-            console.log("User logged in successfully");
             // Fetch the user data after login
             const userData = await account.get();
             setUser(userData); // Set the user data in state
-            console.log("User data:", userData);
         } catch (error) {
             console.error("Login error:", error);
             throw error; // Re-throw the error to handle it in the UI
@@ -33,7 +31,6 @@ export function UserProvider({ children }) {
                 password, // User password
                 "Kareemah User" // Optional name
             );
-            console.log("User registered successfully");
             // Optionally, you can log in the user immediately after registration
             await login(email, password);
         } catch (error) {
@@ -43,11 +40,9 @@ export function UserProvider({ children }) {
 
     async function logout() {
         // Implement logout logic here
-        console.log("Logging out");
         try {
             await account.deleteSession("current"); // Delete the current session
             setUser(null);
-            console.log("User logged out successfully");
         } catch (error) {
             throw Error(error.message);
         }
@@ -56,7 +51,6 @@ export function UserProvider({ children }) {
     async function getInitialUserValue() {
         try {
             const currentUser = await account.get();
-            console.log(currentUser);
 
             if (currentUser) {
                 setUser(currentUser);
