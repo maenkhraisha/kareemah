@@ -56,6 +56,8 @@ export function UserProvider({ children }) {
     async function getInitialUserValue() {
         try {
             const currentUser = await account.get();
+            console.log(currentUser);
+
             if (currentUser) {
                 setUser(currentUser);
             }

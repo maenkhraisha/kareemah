@@ -1,4 +1,4 @@
-import { StyleSheet, Image, useColorScheme, View } from "react-native";
+import { StyleSheet, Image, useColorScheme, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../hooks/useUser";
 
@@ -10,7 +10,7 @@ import ThemeView from "../components/ThemeView";
 
 import { Colors } from "../constants/colors";
 
-const Home = () => {
+const Index = () => {
     const insets = useSafeAreaInsets();
 
     const { user } = useUser();
@@ -50,6 +50,6 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Index;
 
 const styles = StyleSheet.create({});

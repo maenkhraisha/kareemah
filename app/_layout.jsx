@@ -11,9 +11,15 @@ export default function RootLayout() {
         <UserProvider>
             <SafeAreaProvider>
                 <StatusBar style='auto' />
-                <ThemeView style={{ flex: 1 }}>
-                    <Sidebar />
-                    <View style={{ flex: 1 }}>
+                {/* Override ThemeView's default alignment for the root layout */}
+                <ThemeView
+                    style={{
+                        flex: 1,
+                        justifyContent: undefined,
+                        alignItems: undefined,
+                    }}>
+                    {/* The Stack navigator should be wrapped in a View to take up available space */}
+                    <View style={{ flex: 1, width: "100%" }}>
                         <Stack
                             screenOptions={{
                                 headerShown: false,
@@ -27,6 +33,8 @@ export default function RootLayout() {
                             <Stack.Screen name='(UserOnly)' />
                         </Stack>
                     </View>
+                    {/* Sidebar should be rendered on top of the content */}
+                    <Sidebar />
                 </ThemeView>
             </SafeAreaProvider>
         </UserProvider>
