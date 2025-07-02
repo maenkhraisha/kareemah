@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { ID, Permission, Role } from "react-native-appwrite";
 import { useUser } from "../hooks/useUser";
+import { databases } from "../lib/appwrite";
 
 export const TripContext = createContext();
 
