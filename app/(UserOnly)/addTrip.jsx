@@ -45,7 +45,7 @@ const addTrip = () => {
                 date,
                 startHour,
                 endHour,
-                price,
+                price: parseInt(price, 10),
             });
 
             setStartLocation("");
