@@ -2,28 +2,23 @@
 import { useRouter } from "expo-router";
 import { useUser } from "../../hooks/useUser";
 import { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 
 const UserOnly = ({ children }) => {
     const { user, authChecked } = useUser();
     const router = useRouter();
 
     useEffect(() => {
-        if (authChecked && !user) {
+        if (authChecked && user === null) {
             router.replace("/login");
         }
     }, [authChecked, user]);
 
-    if (!authChecked) {
+    if (!authChecked || !user) {
         return (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>
-                <ActivityIndicator size='large' />
-            </View>
+            <Text style={{ textAlign: "center", marginTop: 20, fontSize: 28 }}>
+                Loading...
+            </Text>
         );
     }
 

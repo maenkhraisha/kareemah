@@ -26,7 +26,7 @@ const Sidebar = () => {
     const colorScheme = useColorScheme();
     const theme = Colors[colorScheme] || Colors.light;
 
-    const { logout } = useUser();
+    const { logout, user } = useUser();
 
     const toggleSidebar = () => {
         Animated.timing(slideAnim, {
@@ -72,40 +72,52 @@ const Sidebar = () => {
                     <Link href='/' style={styles.link} onPress={toggleSidebar}>
                         <ThemeText title='Home' style={{ fontSize: 28 }} />
                     </Link>
-                    <Link
-                        href='/requestTrip'
-                        style={styles.link}
-                        onPress={toggleSidebar}>
-                        <ThemeText
-                            title='Request Trip'
-                            style={{ fontSize: 28 }}
-                        />
-                    </Link>
+                    {user && (
+                        <Link
+                            href='/addTrip'
+                            style={styles.link}
+                            onPress={toggleSidebar}>
+                            <ThemeText
+                                title='Add Trip'
+                                style={{ fontSize: 28 }}
+                            />
+                        </Link>
+                    )}
                     <Link
                         href='/about'
                         style={styles.link}
                         onPress={toggleSidebar}>
                         <ThemeText title='About' style={{ fontSize: 28 }} />
                     </Link>
-                    <Link
-                        href='/login'
-                        style={styles.link}
-                        onPress={toggleSidebar}>
-                        <ThemeText title='Login' style={{ fontSize: 28 }} />
-                    </Link>
-                    <Link
-                        href='/register'
-                        style={styles.link}
-                        onPress={toggleSidebar}>
-                        <ThemeText title='Register' style={{ fontSize: 28 }} />
-                    </Link>
+                    {!user && (
+                        <>
+                            <Link
+                                href='/login'
+                                style={styles.link}
+                                onPress={toggleSidebar}>
+                                <ThemeText
+                                    title='Login'
+                                    style={{ fontSize: 28 }}
+                                />
+                            </Link>
+                            <Link
+                                href='/register'
+                                style={styles.link}
+                                onPress={toggleSidebar}>
+                                <ThemeText
+                                    title='Register'
+                                    style={{ fontSize: 28 }}
+                                />
+                            </Link>
+                        </>
+                    )}
 
-                    <ThemeButton
-                        style={styles.link}
-                        onPress={handleLogout}
-                        title='Logout'>
-                        <ThemeText title='Register' style={{ fontSize: 28 }} />
-                    </ThemeButton>
+                    {user && (
+                        <ThemeButton
+                            style={styles.link}
+                            onPress={handleLogout}
+                            title='Logout'></ThemeButton>
+                    )}
                 </View>
             </Animated.View>
 

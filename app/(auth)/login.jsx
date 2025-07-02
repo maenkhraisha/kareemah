@@ -1,4 +1,5 @@
 import {
+    ActivityIndicator,
     Keyboard,
     StyleSheet,
     Touchable,
@@ -95,6 +96,7 @@ const login = () => {
                 <Spacer height='100' />
 
                 <ThemeLink href='/register' title='Register instead' />
+                {/* <ActivityIndicator size='large' color={Colors.primary} /> */}
             </ThemeView>
         </TouchableWithoutFeedback>
     );
